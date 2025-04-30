@@ -137,13 +137,12 @@ function askAI() {
     // Формируем данные для отправки
     const data = {
         chat_id: tg.initDataUnsafe.user?.id,
-        message: `У меня вопрос по уроку ${lessonTitle}`,
-        lesson_id: lessonId,
-        lesson_title: lessonTitle
+        text: `У меня вопрос по уроку ${lessonTitle}`,
+        parse_mode: 'HTML'
     };
 
-    // Отправляем запрос на наш сервер
-    fetch('http://localhost:5000/send_message', {
+    // Отправляем сообщение напрямую через Bot API
+    fetch('https://api.telegram.org/bot7555362414:AAG4Q5Q6MBbYngmqAzc8XAKQyEVloH7fOl8/sendMessage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
