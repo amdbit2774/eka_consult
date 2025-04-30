@@ -131,21 +131,37 @@ function askAI() {
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://maximov-neuro.ru/webhook-test/057506d0-b030-4389-a639-78689374e5f2', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    
     const data = {
         message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`
     };
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            // Закрываем приложение после отправки запроса
+    // Создаем и настраиваем запрос
+    const xhr = new XMLHttpRequest();
+    
+    // Добавляем обработчики событий
+    xhr.onload = function() {
+        console.log('Ответ получен:', xhr.responseText);
+        if (xhr.status >= 200 && xhr.status < 300) {
+            console.log('Запрос успешно отправлен');
             window.Telegram.WebApp.close();
+        } else {
+            console.error('Ошибка при отправке:', xhr.status, xhr.statusText);
         }
     };
 
+    xhr.onerror = function() {
+        console.error('Ошибка сети при отправке запроса');
+    };
+
+    // Открываем соединение
+    xhr.open('POST', 'https://maximov-neuro.ru/webhook-test/057506d0-b030-4389-a639-78689374e5f2', true);
+    
+    // Устанавливаем заголовки
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Accept', 'application/json');
+    
+    // Отправляем запрос
+    console.log('Отправляем данные:', data);
     xhr.send(JSON.stringify(data));
 }
 
