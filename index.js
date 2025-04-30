@@ -7,6 +7,12 @@ tg.expand();
 // Обработчик события готовности
 tg.ready();
 
+// Настраиваем основную кнопку
+tg.MainButton.setParams({
+    text: 'Задать вопрос',
+    color: '#2481cc',
+});
+
 // Данные уроков
 const lessons = [
     {
@@ -102,6 +108,9 @@ function showLessonDetails(lessonId) {
     // Сохраняем ID и название текущего урока для ИИ ассистента
     lessonContent.dataset.currentLesson = lessonId;
     lessonContent.dataset.currentLessonTitle = lesson.title;
+
+    // Показываем кнопку "Задать вопрос"
+    tg.MainButton.show();
 }
 
 // Функция для возврата к списку уроков
@@ -111,6 +120,9 @@ function showLessonsList() {
     
     lessonsList.style.display = 'flex';
     lessonDetails.style.display = 'none';
+
+    // Скрываем кнопку при возврате к списку
+    tg.MainButton.hide();
 }
 
 // Функция для отправки сообщения ИИ ассистенту
@@ -123,8 +135,11 @@ function askAI() {
     const message = `У меня вопрос по уроку ${lessonId} (${lessonTitle})`;
     
     // Отправляем сообщение через WebApp
-    window.Telegram.WebApp.sendData(message);
+    tg.sendData(message);
 }
+
+// Устанавливаем обработчик нажатия на основную кнопку
+tg.MainButton.onClick(askAI);
 
 // Отрисовываем уроки при загрузке страницы
 renderLessons(); 
