@@ -125,17 +125,40 @@ function showLessonsList() {
     tg.MainButton.hide();
 }
 
-// Функция для отправки сообщения ИИ ассистенту
-function askAI() {
+// Функция для отправки сообщения ИИ ассистенту через webhook
+async function askAI() {
     const lessonContent = document.getElementById('lesson-full-content');
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
     
-    // Формируем сообщение с номером и названием урока
-    const message = `У меня вопрос по уроку ${lessonId} (${lessonTitle})`;
-    
-    // Отправляем сообщение через WebApp
-    tg.sendData(message);
+    // Формируем данные для отправки
+    const data = {
+        lessonId: lessonId,
+        lessonTitle: lessonTitle,
+        message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`,
+        userId: tg.initDataUnsafe?.user?.id || 'unknown',
+        username: tg.initDataUnsafe?.user?.username || 'unknown'
+    };
+
+    try {
+        // Отправляем POST запрос на webhook
+        const response = await fetch('https://maximov-neuro.ru/webhook-test/ae8633d6-350e-4caa-830f-d96c9b311907', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            // Если запрос успешен, закрываем приложение
+            tg.close();
+        } else {
+            console.error('Ошибка при отправке запроса');
+        }
+    } catch (error) {
+        console.error('Ошибка:', error);
+    }
 }
 
 // Устанавливаем обработчик нажатия на основную кнопку
