@@ -126,27 +126,27 @@ function showLessonsList() {
 }
 
 // Функция для отправки сообщения через webhook
-async function askAI() {
+function askAI() {
     const lessonContent = document.getElementById('lesson-full-content');
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
 
-    // Закрываем приложение сразу
-    tg.close();
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://maximov-neuro.ru/webhook-test/ae8633d6-350e-4caa-830f-d96c9b311907', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    
+    const data = {
+        message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`
+    };
 
-    try {
-        await fetch('https://maximov-neuro.ru/webhook-test/ae8633d6-350e-4caa-830f-d96c9b311907', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`
-            })
-        });
-    } catch (error) {
-        console.error('Ошибка при отправке:', error);
-    }
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            // Закрываем приложение после отправки запроса
+            window.Telegram.WebApp.close();
+        }
+    };
+
+    xhr.send(JSON.stringify(data));
 }
 
 // Устанавливаем обработчик нажатия на основную кнопку
