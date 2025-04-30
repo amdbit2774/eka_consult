@@ -132,7 +132,7 @@ async function askAI() {
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
 
     try {
-        await fetch('https://maximov-neuro.ru/webhook-test/ae8633d6-350e-4caa-830f-d96c9b311907', {
+        await fetch('https://maximov-neuro.ru/webhook/ae8633d6-350e-4caa-830f-d96c9b311907', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
