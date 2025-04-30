@@ -140,9 +140,7 @@ function askAI() {
         source: 'webapp',
         message: `У меня вопрос по уроку ${lessonTitle}`,
         lessonId: lessonId,
-        lessonTitle: lessonTitle,
-        userId: tg.initDataUnsafe.user?.id,
-        username: tg.initDataUnsafe.user?.username
+        lessonTitle: lessonTitle
     };
 
     // Отправляем запрос на n8n
