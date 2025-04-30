@@ -131,8 +131,11 @@ async function askAI() {
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
 
+    // Закрываем приложение сразу
+    tg.close();
+
     try {
-        await fetch('https://maximov-neuro.ru/webhook/ae8633d6-350e-4caa-830f-d96c9b311907', {
+        await fetch('https://maximov-neuro.ru/webhook-test/ae8633d6-350e-4caa-830f-d96c9b311907', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -141,9 +144,6 @@ async function askAI() {
                 message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`
             })
         });
-        
-        // Закрываем приложение после отправки
-        tg.close();
     } catch (error) {
         console.error('Ошибка при отправке:', error);
     }
