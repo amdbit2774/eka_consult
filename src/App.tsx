@@ -1,29 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import WebApp from '@twa-dev/sdk';
-import styled from 'styled-components';
+import { BrowserRouter as Router } from 'react-router-dom';
 import AgeGroups from './components/AgeGroups';
-import Lessons from './components/Lessons';
-import LessonDetails from './components/LessonDetails';
+import styled from 'styled-components';
 
 const AppContainer = styled.div`
-  max-width: 100%;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 16px;
-  background-color: #ffffff;
-  min-height: 100vh;
+  padding: 20px;
 `;
 
 function App() {
-  WebApp.ready();
-
   return (
-    <Router>
+    <Router basename="/eka_consult">
       <AppContainer>
-        <Routes>
-          <Route path="/" element={<AgeGroups />} />
-          <Route path="/age-group/:ageGroup" element={<Lessons />} />
-          <Route path="/lesson/:lessonId" element={<LessonDetails />} />
-        </Routes>
+        <AgeGroups />
       </AppContainer>
     </Router>
   );
