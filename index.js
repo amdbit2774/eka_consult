@@ -134,32 +134,16 @@ function askAI() {
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
     
-    // Формируем данные для отправки
-    const data = {
-        chat_id: tg.initDataUnsafe.user?.id,
-        text: `У меня вопрос по уроку ${lessonTitle}`,
-        parse_mode: 'HTML'
-    };
-
-    // Отправляем сообщение напрямую через Bot API
-    fetch('https://api.telegram.org/bot7555362414:AAG4Q5Q6MBbYngmqAzc8XAKQyEVloH7fOl8/sendMessage', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        // Закрываем приложение после успешной отправки
+    // Формируем текст запроса с префиксом, который бот сможет распознать
+    const query = `#вопрос_по_уроку ${lessonTitle}`;
+    
+    // Используем switchInlineQuery для отправки сообщения от имени пользователя
+    tg.switchInlineQuery(query);
+    
+    // Закрываем приложение
+    setTimeout(() => {
         tg.close();
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-        // Закрываем приложение даже в случае ошибки
-        tg.close();
-    });
+    }, 100);
 }
 
 // Отрисовываем уроки при загрузке страницы
