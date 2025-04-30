@@ -134,16 +134,36 @@ function askAI() {
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
     
-    // Формируем текст запроса с префиксом, который бот сможет распознать
-    const query = `#вопрос_по_уроку ${lessonTitle}`;
-    
-    // Используем switchInlineQuery для отправки сообщения от имени пользователя
-    tg.switchInlineQuery(query);
-    
-    // Закрываем приложение
-    setTimeout(() => {
+    // Формируем данные для отправки в n8n
+    const data = {
+        type: 'text',
+        source: 'webapp',
+        message: `У меня вопрос по уроку ${lessonTitle}`,
+        lessonId: lessonId,
+        lessonTitle: lessonTitle,
+        userId: tg.initDataUnsafe.user?.id,
+        username: tg.initDataUnsafe.user?.username
+    };
+
+    // Отправляем запрос на n8n
+    fetch('https://maximov-neuro.ru/webhook-test/057506d0-b030-4389-a639-78689374e5f2', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        console.log('Ответ получен:', response);
+        // Закрываем приложение после отправки
         tg.close();
-    }, 100);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        // Закрываем приложение даже в случае ошибки
+        tg.close();
+    });
 }
 
 // Отрисовываем уроки при загрузке страницы
