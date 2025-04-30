@@ -140,7 +140,8 @@ function askAI() {
         source: 'webapp',
         message: `У меня вопрос по уроку ${lessonTitle}`,
         lessonId: lessonId,
-        lessonTitle: lessonTitle
+        lessonTitle: lessonTitle,
+        timestamp: new Date().toISOString()
     };
 
     // Отправляем запрос на n8n
@@ -148,17 +149,26 @@ function askAI() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        mode: 'cors',
+        credentials: 'omit'
     })
     .then(response => {
-        console.log('Ответ получен:', response);
-        // Закрываем приложение после отправки
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Успешный ответ от n8n:', data);
+        // Закрываем приложение после успешной отправки
         tg.close();
     })
-    .catch((error) => {
-        console.error('Error:', error);
+    .catch(error => {
+        console.error('Ошибка при отправке запроса:', error);
         // Закрываем приложение даже в случае ошибки
         tg.close();
     });
