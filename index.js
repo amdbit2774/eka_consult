@@ -13,6 +13,9 @@ tg.MainButton.setParams({
     color: '#2481cc',
 });
 
+// Добавляем обработчик клика на кнопку
+tg.MainButton.onClick(askAI);
+
 // Данные уроков
 const lessons = [
     {
@@ -125,55 +128,17 @@ function showLessonsList() {
     tg.MainButton.hide();
 }
 
-// Функция для отправки сообщения через webhook
+// Функция для отправки сообщения в чат
 function askAI() {
-    const lessonContent = document.getElementById('lesson-full-content');
-    const lessonId = lessonContent.dataset.currentLesson;
-    const lessonTitle = lessonContent.dataset.currentLessonTitle;
-
-    const data = {
-        type: 'text',  // Указываем тип для Switch в n8n
-        source: 'webapp', // Указываем источник
-        message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`,
-        lessonId: lessonId,
-        lessonTitle: lessonTitle
-    };
-
-    // Создаем и настраиваем запрос
-    const xhr = new XMLHttpRequest();
+    // Отправляем тестовое сообщение в чат
+    tg.sendData(JSON.stringify({
+        type: 'message',
+        text: 'тест'
+    }));
     
-    // Добавляем обработчики событий
-    xhr.onload = function() {
-        console.log('Ответ получен:', xhr.responseText);
-        if (xhr.status >= 200 && xhr.status < 300) {
-            console.log('Запрос успешно отправлен');
-            // Добавляем небольшую задержку перед закрытием
-            setTimeout(() => {
-                window.Telegram.WebApp.close();
-            }, 500);
-        } else {
-            console.error('Ошибка при отправке:', xhr.status, xhr.statusText);
-        }
-    };
-
-    xhr.onerror = function() {
-        console.error('Ошибка сети при отправке запроса');
-    };
-
-    // Открываем соединение
-    xhr.open('POST', 'https://maximov-neuro.ru/webhook-test/057506d0-b030-4389-a639-78689374e5f2', true);
-    
-    // Устанавливаем заголовки
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Accept', 'application/json');
-    
-    // Отправляем запрос
-    console.log('Отправляем данные:', data);
-    xhr.send(JSON.stringify(data));
+    // Закрываем приложение
+    tg.close();
 }
-
-// Устанавливаем обработчик нажатия на основную кнопку
-tg.MainButton.onClick(askAI);
 
 // Отрисовываем уроки при загрузке страницы
 renderLessons(); 
