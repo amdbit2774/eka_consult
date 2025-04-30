@@ -134,16 +134,33 @@ function askAI() {
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
     
-    // Формируем текст запроса
-    const query = `У меня вопрос по уроку ${lessonTitle}`;
-    
-    // Используем switchInlineQuery для отправки сообщения
-    tg.switchInlineQuery(query);
-    
-    // Закрываем приложение
-    setTimeout(() => {
+    // Формируем данные для отправки
+    const data = {
+        chat_id: tg.initDataUnsafe.user?.id,
+        message: `У меня вопрос по уроку ${lessonTitle}`,
+        lesson_id: lessonId,
+        lesson_title: lessonTitle
+    };
+
+    // Отправляем запрос на наш сервер
+    fetch('http://localhost:5000/send_message', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Закрываем приложение после успешной отправки
         tg.close();
-    }, 100);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        // Закрываем приложение даже в случае ошибки
+        tg.close();
+    });
 }
 
 // Отрисовываем уроки при загрузке страницы
