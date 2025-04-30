@@ -122,17 +122,8 @@ function askAI() {
     // Формируем сообщение с номером и названием урока
     const message = `У меня вопрос по уроку ${lessonId} (${lessonTitle})`;
     
-    // Используем MainButton для улучшенного UX
-    tg.MainButton.setText('Задать вопрос');
-    tg.MainButton.show();
-    tg.MainButton.onClick(() => {
-        tg.sendData(message);
-        tg.close();
-    });
-    
-    // Также можно сразу отправить сообщение и закрыть приложение
-    tg.sendData(message);
-    tg.close();
+    // Отправляем сообщение через WebApp
+    window.Telegram.WebApp.sendData(message);
 }
 
 // Отрисовываем уроки при загрузке страницы
