@@ -132,7 +132,7 @@ function askAI() {
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://maximov-neuro.ru/webhook-test/ae8633d6-350e-4caa-830f-d96c9b311907', true);
+    xhr.open('POST', 'https://maximov-neuro.ru/webhook-test/057506d0-b030-4389-a639-78689374e5f2', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     
     const data = {
