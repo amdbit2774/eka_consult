@@ -99,8 +99,9 @@ function showLessonDetails(lessonId) {
         <button class="button" onclick="window.open('${lesson.link}', '_blank')">Купить урок</button>
     `;
 
-    // Сохраняем ID текущего урока для ИИ ассистента
+    // Сохраняем ID и название текущего урока для ИИ ассистента
     lessonContent.dataset.currentLesson = lessonId;
+    lessonContent.dataset.currentLessonTitle = lesson.title;
 }
 
 // Функция для возврата к списку уроков
@@ -114,8 +115,23 @@ function showLessonsList() {
 
 // Функция для отправки сообщения ИИ ассистенту
 function askAI() {
-    const currentLesson = document.getElementById('lesson-full-content').dataset.currentLesson;
-    tg.sendData(`У меня к тебе вопрос по уроку ${currentLesson}`);
+    const lessonContent = document.getElementById('lesson-full-content');
+    const lessonId = lessonContent.dataset.currentLesson;
+    const lessonTitle = lessonContent.dataset.currentLessonTitle;
+    
+    // Формируем сообщение с номером и названием урока
+    const message = `У меня вопрос по уроку ${lessonId} (${lessonTitle})`;
+    
+    // Используем MainButton для улучшенного UX
+    tg.MainButton.setText('Задать вопрос');
+    tg.MainButton.show();
+    tg.MainButton.onClick(() => {
+        tg.sendData(message);
+        tg.close();
+    });
+    
+    // Также можно сразу отправить сообщение и закрыть приложение
+    tg.sendData(message);
     tg.close();
 }
 
