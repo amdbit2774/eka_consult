@@ -125,39 +125,27 @@ function showLessonsList() {
     tg.MainButton.hide();
 }
 
-// Функция для отправки сообщения ИИ ассистенту через webhook
+// Функция для отправки сообщения через webhook
 async function askAI() {
     const lessonContent = document.getElementById('lesson-full-content');
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
-    
-    // Формируем данные для отправки
-    const data = {
-        lessonId: lessonId,
-        lessonTitle: lessonTitle,
-        message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`,
-        userId: tg.initDataUnsafe?.user?.id || 'unknown',
-        username: tg.initDataUnsafe?.user?.username || 'unknown'
-    };
 
     try {
-        // Отправляем POST запрос на webhook
-        const response = await fetch('https://maximov-neuro.ru/webhook-test/ae8633d6-350e-4caa-830f-d96c9b311907', {
+        await fetch('https://maximov-neuro.ru/webhook-test/ae8633d6-350e-4caa-830f-d96c9b311907', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify({
+                message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`
+            })
         });
-
-        if (response.ok) {
-            // Если запрос успешен, закрываем приложение
-            tg.close();
-        } else {
-            console.error('Ошибка при отправке запроса');
-        }
+        
+        // Закрываем приложение после отправки
+        tg.close();
     } catch (error) {
-        console.error('Ошибка:', error);
+        console.error('Ошибка при отправке:', error);
     }
 }
 
