@@ -132,7 +132,11 @@ function askAI() {
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
 
     const data = {
-        message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`
+        type: 'text',  // Указываем тип для Switch в n8n
+        source: 'webapp', // Указываем источник
+        message: `У меня вопрос по уроку ${lessonId} (${lessonTitle})`,
+        lessonId: lessonId,
+        lessonTitle: lessonTitle
     };
 
     // Создаем и настраиваем запрос
@@ -143,7 +147,10 @@ function askAI() {
         console.log('Ответ получен:', xhr.responseText);
         if (xhr.status >= 200 && xhr.status < 300) {
             console.log('Запрос успешно отправлен');
-            window.Telegram.WebApp.close();
+            // Добавляем небольшую задержку перед закрытием
+            setTimeout(() => {
+                window.Telegram.WebApp.close();
+            }, 500);
         } else {
             console.error('Ошибка при отправке:', xhr.status, xhr.statusText);
         }
