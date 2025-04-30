@@ -12,9 +12,9 @@ Telegram Mini App для проекта по развитию детей. При
 - 3-5 лет
 
 ## Технологии
-- React
-- TypeScript
-- Vite
+- HTML5
+- CSS3
+- JavaScript
 - Telegram Web App SDK
 
 ## Установка и запуск
@@ -25,7 +25,7 @@ npm install
 
 2. Запустите проект в режиме разработки:
 ```bash
-npm run dev
+npm start
 ```
 
 3. Соберите проект для продакшена:
