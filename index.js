@@ -130,14 +130,20 @@ function showLessonsList() {
 
 // Функция для отправки сообщения в чат
 function askAI() {
-    // Отправляем тестовое сообщение в чат
-    tg.sendData(JSON.stringify({
-        type: 'message',
-        text: 'тест'
-    }));
+    const lessonContent = document.getElementById('lesson-full-content');
+    const lessonId = lessonContent.dataset.currentLesson;
+    const lessonTitle = lessonContent.dataset.currentLessonTitle;
+    
+    // Формируем текст запроса
+    const query = `У меня вопрос по уроку ${lessonTitle}`;
+    
+    // Используем switchInlineQuery для отправки сообщения
+    tg.switchInlineQuery(query);
     
     // Закрываем приложение
-    tg.close();
+    setTimeout(() => {
+        tg.close();
+    }, 100);
 }
 
 // Отрисовываем уроки при загрузке страницы
