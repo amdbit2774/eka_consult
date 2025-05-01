@@ -10,7 +10,7 @@ tg.ready();
 // Настраиваем основную кнопку
 tg.MainButton.setParams({
     text: 'Задать вопрос',
-    color: '#2481cc',
+    color: '#FF7F6A',
 });
 
 // Добавляем обработчик клика на кнопку
@@ -76,11 +76,11 @@ const lessons = [
     }
 ];
 
-// Функция для отображения списка уроков
+// Функция для отображения списка уроков с анимацией
 function renderLessons() {
     const lessonsList = document.getElementById('lessons-list');
-    lessonsList.innerHTML = lessons.map(lesson => `
-        <div class="lesson-card">
+    lessonsList.innerHTML = lessons.map((lesson, index) => `
+        <div class="lesson-card" style="animation-delay: ${index * 0.1}s">
             <img class="lesson-image" src="${lesson.image}" alt="${lesson.title}">
             <div class="lesson-content">
                 <h2 class="lesson-title">${lesson.title}</h2>
@@ -89,9 +89,25 @@ function renderLessons() {
             </div>
         </div>
     `).join('');
+
+    // Добавляем обработчик скролла для анимации
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.lesson-card').forEach(card => {
+        observer.observe(card);
+    });
 }
 
-// Функция для отображения деталей урока
+// Функция для отображения деталей урока с анимацией
 function showLessonDetails(lessonId) {
     const lesson = lessons.find(l => l.id === lessonId);
     const lessonsList = document.getElementById('lessons-list');
@@ -114,15 +130,41 @@ function showLessonDetails(lessonId) {
 
     // Показываем кнопку "Задать вопрос"
     tg.MainButton.show();
+
+    // Добавляем анимацию появления
+    requestAnimationFrame(() => {
+        lessonDetails.style.opacity = '0';
+        requestAnimationFrame(() => {
+            lessonDetails.style.opacity = '1';
+        });
+    });
 }
 
-// Функция для возврата к списку уроков
+// Функция для возврата к списку уроков с анимацией
 function showLessonsList() {
     const lessonsList = document.getElementById('lessons-list');
     const lessonDetails = document.getElementById('lesson-details');
     
-    lessonsList.style.display = 'flex';
-    lessonDetails.style.display = 'none';
+    // Анимация исчезновения
+    lessonDetails.style.opacity = '0';
+    
+    setTimeout(() => {
+        lessonDetails.style.display = 'none';
+        lessonsList.style.display = 'grid';
+        
+        // Анимация появления списка
+        requestAnimationFrame(() => {
+            document.querySelectorAll('.lesson-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    }, 300);
 
     // Скрываем кнопку при возврате к списку
     tg.MainButton.hide();
@@ -137,12 +179,12 @@ function askAI() {
     // Формируем данные для отправки
     const data = {
         chat_id: tg.initDataUnsafe.user?.id,
-        text: `У меня вопрос по уроку ${lessonTitle}`,
+        text: `Хорошо, какой у вас вопрос?`,
         parse_mode: 'HTML'
     };
 
     // Отправляем сообщение через Bot API
-    fetch(`https://api.telegram.org/bot7555362414:AAG4Q5Q6MBbYngmqAzc8XAKQyEVloH7fOl8/sendMessage`, {
+    fetch(`https://api.telegram.org/bot${tg.initDataUnsafe.bot_token}/sendMessage`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -163,4 +205,6 @@ function askAI() {
 }
 
 // Отрисовываем уроки при загрузке страницы
-renderLessons(); 
+document.addEventListener('DOMContentLoaded', () => {
+    renderLessons();
+}); 
