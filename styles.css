@@ -395,8 +395,8 @@ body {
 .lesson-card .price {
     font-family: 'Commissioner-Bold', sans-serif;
     font-size: 20px;
-    color: var(--white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: var(--navy);
+    text-shadow: none;
 }
 
 .lesson-card .button {
@@ -432,8 +432,8 @@ body {
 .lesson-details .price {
     font-family: 'Commissioner-Bold', sans-serif;
     font-size: 24px;
-    color: var(--white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: var(--navy);
+    text-shadow: none;
 }
 
 .lesson-details .button {
@@ -469,8 +469,8 @@ body {
 .buy-section .price {
     font-family: 'Commissioner-Bold', sans-serif;
     font-size: 24px;
-    color: var(--white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: var(--navy);
+    text-shadow: none;
 }
 
 .buy-section .button {
