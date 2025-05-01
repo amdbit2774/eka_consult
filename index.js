@@ -375,7 +375,6 @@ function showLessonDetails(lessonId) {
         <div class="author-section">
             <div class="author-header">
                 <div class="author-photo-placeholder">
-                    <!-- Место для фото автора -->
                     <img src="${lesson.author.photo}" alt="${lesson.author.name}" class="author-photo">
                 </div>
                 <h3>Кто ведет: ${lesson.author.name}</h3>
@@ -385,7 +384,10 @@ function showLessonDetails(lessonId) {
             </ul>
         </div>
         
-        <button class="button" onclick="window.open('${lesson.link}', '_blank')">Купить урок</button>
+        <div class="buy-section">
+            <span class="price">${lesson.price}</span>
+            <button class="button" onclick="window.open('${lesson.link}', '_blank')">Купить урок</button>
+        </div>
     `;
 
     // Сохраняем ID и название текущего урока для ИИ ассистента
