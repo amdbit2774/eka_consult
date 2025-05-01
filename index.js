@@ -144,31 +144,39 @@ function askAI() {
         timestamp: new Date().toISOString()
     };
 
+    console.log('Отправляем данные:', data);
+
     // Отправляем запрос на n8n
     fetch('https://maximov-neuro.ru/webhook-test/057506d0-b030-4389-a639-78689374e5f2', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
+            'Accept': 'application/json'
         },
-        body: JSON.stringify(data),
-        mode: 'cors',
-        credentials: 'omit'
+        body: JSON.stringify(data)
     })
     .then(response => {
+        console.log('Статус ответа:', response.status);
+        console.log('Заголовки ответа:', response.headers);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.json();
+        return response.text(); // Сначала получаем текст, чтобы увидеть ответ
     })
-    .then(data => {
-        console.log('Успешный ответ от n8n:', data);
+    .then(text => {
+        console.log('Ответ от сервера:', text);
+        try {
+            const data = JSON.parse(text);
+            console.log('Парсинг JSON успешен:', data);
+        } catch (e) {
+            console.log('Ответ не в формате JSON:', text);
+        }
         // Закрываем приложение после успешной отправки
         tg.close();
     })
     .catch(error => {
         console.error('Ошибка при отправке запроса:', error);
+        console.error('Стек ошибки:', error.stack);
         // Закрываем приложение даже в случае ошибки
         tg.close();
     });
