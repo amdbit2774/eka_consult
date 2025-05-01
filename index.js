@@ -176,32 +176,15 @@ function askAI() {
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
     
-    // Формируем данные для отправки
-    const data = {
-        chat_id: tg.initDataUnsafe.user?.id,
-        text: `Хорошо, какой у вас вопрос?`,
-        parse_mode: 'HTML'
-    };
+    // Отправляем сообщение через Telegram Web App
+    tg.sendData(JSON.stringify({
+        action: 'ask_question',
+        lesson_id: lessonId,
+        lesson_title: lessonTitle
+    }));
 
-    // Отправляем сообщение через Bot API
-    fetch(`https://api.telegram.org/bot${tg.initDataUnsafe.bot_token}/sendMessage`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Сообщение отправлено:', data);
-        // Закрываем приложение после отправки
-        tg.close();
-    })
-    .catch(error => {
-        console.error('Ошибка при отправке:', error);
-        // Закрываем приложение даже в случае ошибки
-        tg.close();
-    });
+    // Закрываем приложение
+    tg.close();
 }
 
 // Отрисовываем уроки при загрузке страницы
