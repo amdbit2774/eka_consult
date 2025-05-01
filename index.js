@@ -134,49 +134,29 @@ function askAI() {
     const lessonId = lessonContent.dataset.currentLesson;
     const lessonTitle = lessonContent.dataset.currentLessonTitle;
     
-    // Формируем данные для отправки в n8n
+    // Формируем данные для отправки
     const data = {
-        type: 'text',
-        source: 'webapp',
-        message: `У меня вопрос по уроку ${lessonTitle}`,
-        lessonId: lessonId,
-        lessonTitle: lessonTitle,
-        timestamp: new Date().toISOString()
+        chat_id: tg.initDataUnsafe.user?.id,
+        text: `У меня вопрос по уроку ${lessonTitle}`,
+        parse_mode: 'HTML'
     };
 
-    console.log('Отправляем данные:', data);
-
-    // Отправляем запрос на n8n
-    fetch('https://maximov-neuro.ru/webhook-test/057506d0-b030-4389-a639-78689374e5f2', {
+    // Отправляем сообщение через Bot API
+    fetch(`https://api.telegram.org/bot7555362414:AAG4Q5Q6MBbYngmqAzc8XAKQyEVloH7fOl8/sendMessage`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     })
-    .then(response => {
-        console.log('Статус ответа:', response.status);
-        console.log('Заголовки ответа:', response.headers);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text(); // Сначала получаем текст, чтобы увидеть ответ
-    })
-    .then(text => {
-        console.log('Ответ от сервера:', text);
-        try {
-            const data = JSON.parse(text);
-            console.log('Парсинг JSON успешен:', data);
-        } catch (e) {
-            console.log('Ответ не в формате JSON:', text);
-        }
-        // Закрываем приложение после успешной отправки
+    .then(response => response.json())
+    .then(data => {
+        console.log('Сообщение отправлено:', data);
+        // Закрываем приложение после отправки
         tg.close();
     })
     .catch(error => {
-        console.error('Ошибка при отправке запроса:', error);
-        console.error('Стек ошибки:', error.stack);
+        console.error('Ошибка при отправке:', error);
         // Закрываем приложение даже в случае ошибки
         tg.close();
     });
