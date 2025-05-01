@@ -343,4 +343,32 @@ body {
     margin-bottom: 20px;
     color: var(--navy);
     opacity: 0.9;
+}
+
+.lesson-card .buy-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.lesson-card .price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.lesson-card .buy-link {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #0056b3, #007bff);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.lesson-card .buy-link:hover {
+    background: linear-gradient(135deg, #004494, #0056b3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 } 
