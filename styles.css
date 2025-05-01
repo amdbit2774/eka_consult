@@ -380,6 +380,80 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+.lesson-card .buy-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lesson-card .price {
+    font-family: 'Commissioner-Bold', sans-serif;
+    font-size: 20px;
+    color: var(--white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.lesson-card .button {
+    background: linear-gradient(135deg, var(--coral), var(--pink));
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: 'Commissioner-Bold', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 127, 106, 0.3);
+}
+
+.lesson-card .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 127, 106, 0.4);
+    background: linear-gradient(135deg, var(--pink), var(--coral));
+}
+
+.lesson-details .buy-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lesson-details .price {
+    font-family: 'Commissioner-Bold', sans-serif;
+    font-size: 24px;
+    color: var(--white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.lesson-details .button {
+    background: linear-gradient(135deg, var(--coral), var(--pink));
+    color: var(--white);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-family: 'Commissioner-Bold', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 127, 106, 0.3);
+}
+
+.lesson-details .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 127, 106, 0.4);
+    background: linear-gradient(135deg, var(--pink), var(--coral));
+}
+
 .buy-section {
     display: flex;
     align-items: center;
