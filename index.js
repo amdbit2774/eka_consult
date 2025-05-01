@@ -22,8 +22,39 @@ const lessons = [
         id: 1,
         title: '0-3 месяца',
         image: 'https://placehold.co/600x400/png?text=0-3+месяца',
-        shortDescription: 'Развитие малыша в первые месяцы жизни',
-        fullDescription: 'Подробное описание упражнений и методик для развития ребенка от рождения до 3 месяцев. Включает массаж, гимнастику и развивающие игры.',
+        shortDescription: `Содержание видеоурока:
+- развитие мозга и психики;
+- запуск отношений привязанности;
+- ведущий тип деятельности;
+- как развиваются крупная и мелкая моторика;
+- как развивается речь;
+...`,
+        fullDescription: `Содержание видеоурока:
+- развитие мозга и психики;
+- запуск отношений привязанности;
+- ведущий тип деятельности;
+- как развиваются крупная и мелкая моторика;
+- как развивается речь;
+- развитие навыков по возрасту;
+- «красные» флажки, что должно насторожить;
+- какие игрушки нужны в этом возрасте;
+- памятка «Список базовых книг для малыша до 1 года»;
+- сценарий самых развивающих игр с малышом;
+- как обустроить комнату малыша;
+- как помочь в развитии;
+- правила безопасности;
+- список девайсов, которые облегчат жизнь;
+- памятка «График посещения врачей малышами до 1 года»;`,
+        author: {
+            name: 'Антипенко Наталия',
+            photo: 'placeholder-for-photo.jpg', // Здесь будет путь к фото
+            credentials: [
+                'Детский психолог с компетенцией в области дефектологии и семейной психологии.',
+                'Опыт работы с детьми и родителями с 2008г.',
+                'Автор проекта "Расту по возрасту".',
+                'Мама троих детей.'
+            ]
+        },
         link: 'https://example.com/lesson1'
     },
     {
@@ -120,7 +151,21 @@ function showLessonDetails(lessonId) {
     lessonContent.innerHTML = `
         <h2 class="lesson-title">${lesson.title}</h2>
         <img class="lesson-image" src="${lesson.image}" alt="${lesson.title}">
-        <p class="lesson-description">${lesson.fullDescription}</p>
+        <div class="lesson-description">${lesson.fullDescription.replace(/\n/g, '<br>')}</div>
+        
+        <div class="author-section">
+            <div class="author-header">
+                <div class="author-photo-placeholder">
+                    <!-- Место для фото автора -->
+                    <img src="${lesson.author.photo}" alt="${lesson.author.name}" class="author-photo">
+                </div>
+                <h3>Кто ведет: ${lesson.author.name}</h3>
+            </div>
+            <ul class="author-credentials">
+                ${lesson.author.credentials.map(cred => `<li>${cred}</li>`).join('')}
+            </ul>
+        </div>
+        
         <button class="button" onclick="window.open('${lesson.link}', '_blank')">Купить урок</button>
     `;
 
