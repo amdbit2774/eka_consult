@@ -21,7 +21,7 @@ const lessons = [
     {
         id: 1,
         title: '0-3 месяца',
-        image: 'https://placehold.co/600x400/png?text=0-3+месяца',
+        image: 'images/0-3.png',
         shortDescription: `Содержание видеоурока:
 - развитие мозга и психики;
 - запуск отношений привязанности;
@@ -61,7 +61,7 @@ const lessons = [
     {
         id: 2,
         title: '3-6 месяцев',
-        image: 'https://placehold.co/600x400/png?text=3-6+месяцев',
+        image: 'images/3-6.png',
         shortDescription: `Содержание видеоурока:
 - развитие мозга и психики; 
 - запуск отношений привязанности;
@@ -103,7 +103,7 @@ const lessons = [
     {
         id: 3,
         title: '6-9 месяцев',
-        image: 'https://placehold.co/600x400/png?text=6-9+месяцев',
+        image: 'images/6-9.png',
         shortDescription: `Содержание видеоурока:
 - развитие мозга и психики; 
 - развитие отношений привязанности;
@@ -145,7 +145,7 @@ const lessons = [
     {
         id: 4,
         title: '9-12 месяцев',
-        image: 'https://placehold.co/600x400/png?text=9-12+месяцев',
+        image: 'images/9-12.png',
         shortDescription: `Содержание видеоурока:
 - развитие мозга и психики; 
 - развитие отношений привязанности;
@@ -193,7 +193,7 @@ const lessons = [
     {
         id: 5,
         title: '1-2 года',
-        image: 'https://placehold.co/600x400/png?text=1-2+года',
+        image: 'images/1-2.png',
         shortDescription: `Содержание видеоурока:
 - развитие мозга и психики; 
 - развитие отношений привязанности;
@@ -244,7 +244,7 @@ const lessons = [
     {
         id: 6,
         title: '2-3 года',
-        image: 'https://placehold.co/600x400/png?text=2-3+года',
+        image: 'images/2-3.png',
         shortDescription: `Содержание видеоурока:
 - развитие мозга и психики ребёнка; 
 - развитие отношений привязанности;
@@ -295,7 +295,7 @@ const lessons = [
     {
         id: 7,
         title: '3-5 лет',
-        image: 'https://placehold.co/600x400/png?text=3-5+лет',
+        image: 'images/3-5.png',
         shortDescription: `Содержание видеоурока:
 - Как создать прочную эмоциональную связь с ребенком?
 - Почему сюжетно-ролевые игры важнее английского и ментальной арифметики?
