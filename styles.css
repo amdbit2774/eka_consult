@@ -302,9 +302,9 @@ body {
 }
 
 .author-photo-placeholder {
-    width: 150px;
+    width: 180px;
     height: 160px;
-    border-radius: 75px;
+    border-radius: 80px;
     margin-right: 20px;
     overflow: hidden;
     border: 3px solid rgba(82, 116, 255, 0.3);
