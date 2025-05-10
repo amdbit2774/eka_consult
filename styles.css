@@ -319,6 +319,17 @@ body {
     background: #fff;
 }
 
+/* Специфичные стили для фото Екатерины (pavshenko.jpg) */
+.author-photo-placeholder:has(.author-photo[src*="pavshenko.jpg"]) {
+    width: 170px; /* Расширяем рамку */
+    height: 190px; /* Увеличиваем высоту рамки */
+    border-radius: 95px; /* Корректируем радиус для сохранения формы */
+}
+
+.author-photo[src*="pavshenko.jpg"] {
+    object-position: center 30%; /* Смещаем видимую область фото для лучшего центрирования человека */
+}
+
 .author-header h3 {
     font-family: 'Commissioner-Bold', sans-serif;
     font-size: 24px;
