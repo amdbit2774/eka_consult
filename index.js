@@ -47,7 +47,7 @@ const lessons = [
 - памятка «График посещения врачей малышами до 1 года»;`,
         author: {
             name: 'Антипенко Наталия',
-            photo: 'placeholder-for-photo.jpg',
+            photo: 'images/antipenko.jpg',
             credentials: [
                 'Детский психолог с компетенцией в области дефектологии и семейной психологии.',
                 'Опыт работы с детьми и родителями с 2008г.',
@@ -87,7 +87,7 @@ const lessons = [
 - памятка «График посещения врачей малышами до 1 года»;`,
         author: {
             name: 'Павшенко Екатерина Анатольевна',
-            photo: 'placeholder-for-photo.jpg',
+            photo: 'images/pavshenko.jpg',
             credentials: [
                 'Кандидат педагогических наук.',
                 'Психолог, нейропсихолог.',
@@ -131,7 +131,7 @@ const lessons = [
 - памятка «График посещения врачей малышами до 1 года»;`,
         author: {
             name: 'Антипенко Наталия',
-            photo: 'placeholder-for-photo.jpg',
+            photo: 'images/antipenko.jpg',
             credentials: [
                 'Детский психолог с компетенцией в области дефектологии и семейной психологии.',
                 'Опыт работы с детьми и родителями с 2008г.',
@@ -177,7 +177,7 @@ const lessons = [
 - памятка «Доступные навыки самостоятельности»;`,
         author: {
             name: 'Павшенко Екатерина Анатольевна',
-            photo: 'placeholder-for-photo.jpg',
+            photo: 'images/pavshenko.jpg',
             credentials: [
                 'Кандидат педагогических наук.',
                 'Психолог, нейропсихолог.',
@@ -230,7 +230,7 @@ const lessons = [
 - памятка «Советы бабушкам и дедушкам 1-2 летних малышей»`,
         author: {
             name: 'Антипенко Наталия',
-            photo: 'placeholder-for-photo.jpg',
+            photo: 'images/antipenko.jpg',
             credentials: [
                 'Детский психолог с компетенцией в области дефектологии и семейной психологии.',
                 'Опыт работы с детьми и родителями с 2008г.',
@@ -279,7 +279,7 @@ const lessons = [
 - «Список базовых игрушек на возраст»`,
         author: {
             name: 'Павшенко Екатерина Анатольевна',
-            photo: 'placeholder-for-photo.jpg',
+            photo: 'images/pavshenko.jpg',
             credentials: [
                 'Кандидат педагогических наук.',
                 'Психолог, нейропсихолог.',
@@ -313,7 +313,7 @@ const lessons = [
 - Кризис трёх лет и как пережить истерики`,
         author: {
             name: 'Антипенко Наталия',
-            photo: 'placeholder-for-photo.jpg',
+            photo: 'images/antipenko.jpg',
             credentials: [
                 'Детский психолог с компетенцией в области дефектологии и семейной психологии.',
                 'Опыт работы с детьми и родителями с 2008г.',
